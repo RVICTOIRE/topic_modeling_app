@@ -72,12 +72,14 @@ if page == "📥 Collecte des Tweets":
             df = pd.read_csv(uploaded_file)
 
             # Vérifier si la colonne existe
-            if 'tweet' in df.columns:
-                st.session_state.tweets_df = df
-                st.success("Fichier chargé et stocké en mémoire.")
-                st.dataframe(df)
-            else:
-                st.error("Erreur : Votre fichier doit contenir une colonne nommée 'tweet'.")
+            st.write("Colonnes disponibles :", df.columns.tolist())
+
+            tweet_column = st.selectbox("Sélectionnez la colonne contenant les tweets :", df.columns)
+
+            st.session_state.tweets_df = df[[tweet_column]].rename(columns={tweet_column: 'tweet'})
+            st.success("Fichier chargé et colonne sélectionnée avec succès.")
+            st.dataframe(st.session_state.tweets_df)
+
 
 
 # ---- 2. ANALYSE DES SUJETS ----
