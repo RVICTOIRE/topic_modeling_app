@@ -133,7 +133,7 @@ elif page == "🧠 Analyse des sujets":
         st.session_state.lda_model = lda_model
         st.session_state.dictionary = dictionary
         st.session_state.corpus = corpus
-        st.session_state.n_topics = n_topics   # ✅ Correction : placer ici !
+        st.session_state.n_topics = n_topics  
 
         st.subheader("📄 Topics extraits :")
         for idx, topic in lda_model.print_topics(-1):
@@ -183,7 +183,13 @@ elif page == "📊 Visualisation":
         # 6. Visualisation pyLDAvis
         st.subheader("🔍 Visualisation interactive avec pyLDAvis")
 
-        vis = pyLDAvis.gensim_models.prepare(lda_model, corpus, dictionary)
-        html_string = pyLDAvis.prepared_data_to_html(vis)
-        components.html(html_string, height=800, scrolling=True)
+        try:
+            import pyLDAvis.gensim_models
+            import pyLDAvis
+            vis = pyLDAvis.gensim_models.prepare(lda_model, corpus, dictionary)
+            html_string = pyLDAvis.prepared_data_to_html(vis)
+            components.html(html_string, height=800, scrolling=True)
+        except Exception as e:
+            st.warning("Visualisation pyLDAvis désactivée sur Streamlit Cloud. Utilisez WordCloud et Histogramme.")
+
 
