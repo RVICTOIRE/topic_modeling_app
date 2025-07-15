@@ -183,13 +183,7 @@ elif page == "📊 Visualisation":
         # 6. Visualisation pyLDAvis
         st.subheader("🔍 Visualisation interactive avec pyLDAvis")
 
-        try:
-            import pyLDAvis.gensim_models
-            import pyLDAvis
-            vis = pyLDAvis.gensim_models.prepare(lda_model, corpus, dictionary)
-            html_string = pyLDAvis.prepared_data_to_html(vis)
-            components.html(html_string, height=800, scrolling=True)
-        except Exception as e:
-            st.warning("Visualisation pyLDAvis désactivée sur Streamlit Cloud. Utilisez WordCloud et Histogramme.")
+        st.warning("La visualisation interactive avec pyLDAvis est désactivée sur Streamlit Cloud pour des raisons de compatibilité. Veuillez utiliser les WordClouds et l'histogramme pour explorer les sujets.")
+
 
 
