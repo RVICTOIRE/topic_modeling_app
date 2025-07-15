@@ -10,6 +10,7 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from gensim import corpora, models
 import pyLDAvis.gensim_models
+import pyLDAvis
 import streamlit.components.v1 as components
 
 nltk.download('stopwords')
